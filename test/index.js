@@ -116,6 +116,26 @@ describe('Fake', () => {
         expect(item).to.equal('fake-engine');
     });
 
+    it('should set and get a new value', async (done) => {
+
+        const client = new Catbox.Client(CatboxFake);
+
+        await client.start();
+
+        const key = {
+            id: 'any_key',
+            segment: 'any_segment'
+        };
+        const value = 'new-value';
+        const _ttl = 9999;
+
+        await client.set(key, value, _ttl);
+        const { item, ttl } = await client.get(key);
+
+        expect(ttl).to.most(9999);
+        expect(item).to.equal(value);
+    });
+
     it('should set fake item', async (done) => {
 
         const client = new Catbox.Client(CatboxFake);
@@ -290,11 +310,10 @@ describe('Fake', () => {
         });
 
         const delay = 50;
-        let start;
         trojan.delay(delay + 1);
         trojan.delay(0);
 
-        start = Date.now();
+        const start = Date.now();
         await client.start();
         expect(Date.now() - start).to.most(delay);
 
