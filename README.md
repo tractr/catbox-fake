@@ -8,7 +8,10 @@ Current version: [![Current Version](https://img.shields.io/npm/v/catbox-fake.sv
 
 ### Options
 
-- `alwaysReady` - tells the engine to always be ready, even before starting it or after it was stopped.
-- `alwaysNotReady` - tells the engine to always be not ready, even after starting.
-
-You cannot set both options to true as it would create a conflict.
+- `trojan: function(methods)` - A function that will be called on client initialization. This methods receives as first argument an object containing client's special methods. The object has these properties:
+    - `throw: function(enable)` - tells the engine to always throw an error
+        - `enable` - A boolean to enable or not this feature
+    - `ready: function(enable)` - tells the engine to say if it is ready or not
+        - `enable` - A boolean for the ready status
+    - `delay: function(value)` - tells the engine to wait a while before returning
+        - `value` - A number for milliseconds
