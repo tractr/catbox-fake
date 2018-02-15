@@ -146,7 +146,7 @@ describe('Fake', () => {
         await client.drop(key);
     });
 
-    it('should throw an error if throw is enable', async (done) => {
+    it('should throw an error if throw is enabled', async (done) => {
 
         let trojan = {};
         const client = new Catbox.Client(CatboxFake, {
@@ -214,6 +214,27 @@ describe('Fake', () => {
         }
     });
 
+    it('should not throw an error if throw is enabled then disabled', async (done) => {
+
+        let trojan = {};
+        const client = new Catbox.Client(CatboxFake, {
+            trojan: (m) => {
+
+                trojan = m;
+            }
+        });
+
+        trojan.throw(true);
+        trojan.throw(false);
+
+        try {
+            await client.start();
+            expect(true).to.be.true();
+        }
+        catch (err) {
+            fail('Should not fail');
+        }
+    });
 
     it('should delay response if a delay is given', async (done) => {
 
@@ -255,6 +276,27 @@ describe('Fake', () => {
         start = Date.now();
         await client.stop();
         expect(Date.now() - start).to.least(delay);
+
+    });
+
+    it('should not delay response if a delay is given and then removed', async (done) => {
+
+        let trojan = {};
+        const client = new Catbox.Client(CatboxFake, {
+            trojan: (m) => {
+
+                trojan = m;
+            }
+        });
+
+        const delay = 50;
+        let start;
+        trojan.delay(delay + 1);
+        trojan.delay(0);
+
+        start = Date.now();
+        await client.start();
+        expect(Date.now() - start).to.most(delay);
 
     });
 });
