@@ -1,6 +1,6 @@
 {
   "name": "catbox-fake",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Fake catbox engine used to test catbox-fallback.",
   "main": "lib/index.js",
   "scripts": {
@@ -18,8 +18,8 @@
     "hoek": "^5.0.2"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/tractr/catbox-fake.git"
+    "type": "git",
+    "url": "https://github.com/tractr/catbox-fake.git"
   },
   "engines": {
     "node": ">=8.9.0"
