@@ -1,6 +1,6 @@
 {
   "name": "catbox-fake",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Fake catbox engine used to test catbox-fallback.",
   "main": "lib/index.js",
   "scripts": {
